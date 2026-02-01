@@ -155,6 +155,11 @@ valentine-quest/
 │   ├── components/
 │   │   ├── Layout/
 │   │   │   └── Container.tsx       # Responsive wrapper
+│   │   ├── Background/
+│   │   │   └── FallingHearts.tsx   # Animated falling hearts
+│   │   ├── UI/
+│   │   │   ├── MuteButton.tsx      # Sound toggle button
+│   │   │   └── SupportButton.tsx   # Tech support contact
 │   │   └── Terminal/
 │   │       ├── BootSequence.tsx    # Initial loading animation
 │   │       ├── Message.tsx         # Typing effect component
@@ -162,6 +167,8 @@ valentine-quest/
 │   │       ├── HintButton.tsx      # Animated hint button
 │   │       ├── ProgressBar.tsx     # Level progress indicator
 │   │       └── FinalReward.tsx     # Victory screen with photos
+│   ├── hooks/
+│   │   └── useSoundManager.ts      # Web Audio API sound effects
 │   ├── data/
 │   │   └── levels.ts               # Questions, answers, hints
 │   ├── types/
@@ -175,6 +182,9 @@ valentine-quest/
 ├── package.json
 ├── tailwind.config.js
 ├── tsconfig.json
+├── README.md
+├── CHECKLIST.md
+├── SUPPORT_SETUP.md                # Tech support configuration guide
 └── vite.config.ts
 ```
 

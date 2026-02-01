@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from './components/Layout/Container';
 import { Message } from './components/Terminal/Message';
@@ -7,7 +7,10 @@ import { BootSequence } from './components/Terminal/BootSequence';
 import { HintButton } from './components/Terminal/HintButton';
 import { FinalReward } from './components/Terminal/FinalReward';
 import { ProgressBar } from './components/Terminal/ProgressBar';
-import { FallingHearts } from './components/Background/FallingHearts.tsx';
+import { FallingHearts } from './components/Background/FallingHearts';
+import { MuteButton } from './components/UI/MuteButton';
+import { SupportButton } from './components/UI/SupportButton';
+import { useSoundManager } from './hooks/useSoundManager';
 import { levels } from './data/levels';
 import { GamePhase } from './types';
 import { Shield, AlertTriangle } from 'lucide-react';
@@ -20,10 +23,35 @@ function App() {
     const [shouldShake, setShouldShake] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessages, setSuccessMessages] = useState<string[]>([]);
+    const [isMuted, setIsMuted] = useState(true); // Start muted due to browser autoplay policies
+    const [audioInitialized, setAudioInitialized] = useState(false);
 
     const currentLevel = levels[currentLevelIndex];
 
+    // Sound manager
+    const { initializeAudio, playKeyPress, playSuccess, playError, playBoot } = useSoundManager({ isMuted });
+
+    // Initialize audio on first user interaction
+    useEffect(() => {
+        const handleFirstInteraction = () => {
+            if (!audioInitialized) {
+                initializeAudio();
+                setAudioInitialized(true);
+                setIsMuted(false); // Unmute on first interaction
+            }
+        };
+
+        document.addEventListener('click', handleFirstInteraction, { once: true });
+        document.addEventListener('keydown', handleFirstInteraction, { once: true });
+
+        return () => {
+            document.removeEventListener('click', handleFirstInteraction);
+            document.removeEventListener('keydown', handleFirstInteraction);
+        };
+    }, [audioInitialized, initializeAudio]);
+
     const handleBootComplete = () => {
+        playBoot();
         setGamePhase('playing');
     };
 
@@ -37,6 +65,7 @@ function App() {
 
         if (normalizedUserAnswer === normalizedCorrectAnswer) {
             // Correct answer!
+            playSuccess();
             setSuccessMessages([
                 ...successMessages,
                 `✓ Уровень ${currentLevelIndex + 1} пройден! Протокол подтверждён.`,
@@ -55,6 +84,7 @@ function App() {
             }, 1500);
         } else {
             // Wrong answer
+            playError();
             const newAttemptCount = attemptCount + 1;
             setAttemptCount(newAttemptCount);
             setErrorMessage(currentLevel.errorMessage);
@@ -74,6 +104,7 @@ function App() {
     return (
         <div className="crt-screen min-h-[100dvh]">
             <FallingHearts />
+            <MuteButton isMuted={isMuted} onToggle={() => setIsMuted(!isMuted)} />
             <Container>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -192,6 +223,7 @@ function App() {
                                         placeholder="Введите ответ..."
                                         shouldShake={shouldShake}
                                         onShakeComplete={() => setShouldShake(false)}
+                                        onKeyPress={playKeyPress}
                                     />
 
                                     {/* Hint Button */}
@@ -204,6 +236,19 @@ function App() {
                                                 className="flex justify-center"
                                             >
                                                 <HintButton onClick={handleShowHint} />
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+
+                                    {/* Support Button - appears after 3 errors */}
+                                    <AnimatePresence>
+                                        {attemptCount >= 3 && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: 20 }}
+                                            >
+                                                <SupportButton currentQuestion={currentLevel.question} />
                                             </motion.div>
                                         )}
                                     </AnimatePresence>

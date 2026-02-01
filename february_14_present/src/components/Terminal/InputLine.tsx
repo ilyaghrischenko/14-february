@@ -9,6 +9,7 @@ interface InputLineProps {
     onShakeComplete: () => void;
     disabled?: boolean;
     showLockIcon?: boolean;
+    onKeyPress?: () => void;
 }
 
 export const InputLine: React.FC<InputLineProps> = ({
@@ -18,6 +19,7 @@ export const InputLine: React.FC<InputLineProps> = ({
                                                         onShakeComplete,
                                                         disabled = false,
                                                         showLockIcon = true,
+                                                        onKeyPress,
                                                     }) => {
     const [value, setValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
@@ -77,7 +79,10 @@ export const InputLine: React.FC<InputLineProps> = ({
                         ref={inputRef}
                         type="text"
                         value={value}
-                        onChange={(e) => setValue(e.target.value)}
+                        onChange={(e) => {
+                            setValue(e.target.value);
+                            onKeyPress?.();
+                        }}
                         disabled={disabled}
                         placeholder={placeholder}
                         className="w-full bg-neutral-950/50 border border-pink-500/30 rounded px-4 py-3
