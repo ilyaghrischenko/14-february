@@ -7,8 +7,9 @@ import { BootSequence } from './components/Terminal/BootSequence';
 import { HintButton } from './components/Terminal/HintButton';
 import { FinalReward } from './components/Terminal/FinalReward';
 import { ProgressBar } from './components/Terminal/ProgressBar';
+import { FallingHearts } from './components/Background/FallingHearts.tsx';
 import { levels } from './data/levels';
-import type {GamePhase} from './types';
+import { GamePhase } from './types';
 import { Shield, AlertTriangle } from 'lucide-react';
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
 
     return (
         <div className="crt-screen min-h-[100dvh]">
+            <FallingHearts />
             <Container>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
