@@ -75,7 +75,7 @@ export const FinalReward: React.FC = () => {
                 className="space-y-4"
             >
                 <h2 className="text-2xl font-display font-bold text-center text-pink-400 neon-text">
-                    Наши воспоминания 💕
+                    Местонахождение подарка 💕
                 </h2>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">

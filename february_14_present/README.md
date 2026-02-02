@@ -6,6 +6,12 @@ A cyber-romance terminal interface where your girlfriend answers personal questi
 
 - **Cyber-Romance Theme**: Terminal-style interface with neon pink aesthetics
 - **CRT Screen Effects**: Authentic retro terminal with scanlines and glitch effects
+- **Falling Hearts Animation**: Beautiful red hearts falling in the background
+- **🔊 Sound Design**: Keyboard typing sounds, success chimes, error glitches
+- **💌 Love Letter Phase**: Emotional letter reveal after quiz completion
+- **💖 Heart Assembly Animation**: Cinematic "I LOVE YOU" moment
+- **🆘 Tech Support Button**: After 3 errors, can message you via Telegram/WhatsApp
+- **🔇 Mute Control**: Toggle sound on/off (top-right corner)
 - **Responsive Design**: Flawless on both iPhone 17 Pro Max and Desktop
 - **Progressive Difficulty**: Questions get more challenging as she progresses
 - **Hint System**: After 2 failed attempts, a hint button appears
@@ -92,7 +98,32 @@ const photos = [
 {index === 0 && 'Your caption in Russian'}
 ```
 
-### 4. Customize Colors (Optional)
+### 4. Configure Tech Support (IMPORTANT!)
+
+📝 **File**: `src/components/UI/SupportButton.tsx`
+
+Replace these values:
+```typescript
+const telegramUsername = 'YOUR_TELEGRAM_USERNAME'; // Your @username (without @)
+const whatsappNumber = '1234567890'; // Your number with country code
+```
+
+**See SUPPORT_SETUP.md for detailed instructions!**
+
+### 5. Customize Love Letter (IMPORTANT!)
+
+📝 **File**: `src/components/Phases/LoveLetter.tsx`
+
+Replace the placeholder text with your actual love letter:
+```typescript
+const letterText = `
+Your heartfelt message here...
+`;
+```
+
+**See EMOTIONAL_PHASES.md for detailed guide!**
+
+### 6. Customize Colors (Optional)
 
 Edit `tailwind.config.js` to change the color scheme:
 
@@ -126,17 +157,22 @@ The app is optimized for iPhone 17 Pro Max:
 
 ## 🎯 Game Flow
 
-1. **Boot Sequence**: Fake terminal initialization with typing effects
+1. **Boot Sequence**: Fake terminal initialization with typing effects (+ boot sound)
 2. **Authentication Loop**:
-    - Display question
-    - User enters answer
-    - Wrong answer → Shake animation
-    - 2 errors → Hint button appears
+   - Display question
+   - User enters answer (keyboard sounds on typing)
+   - Wrong answer → Shake animation + error glitch sound
+   - Correct answer → Success chime sound
+   - 2 errors → Hint button appears
+   - 3 errors → Tech Support button appears (Telegram/WhatsApp)
 3. **Progress Tracking**: Visual progress bar with hearts
-4. **Final Reward**:
-    - Success animation
-    - Reveal message with gift location
-    - Photo grid in Polaroid style
+4. **Love Letter Phase** (NEW!): Romantic letter reveal after completing all questions
+5. **Heart Assembly Animation** (NEW!): Cinematic "Я ТЕБЯ ЛЮБЛЮ" moment (5.5 seconds)
+6. **Audio Control**: Mute button in top-right corner
+7. **Final Reward**:
+   - Success animation
+   - Reveal message with gift location
+   - Photo grid in Polaroid style
 
 ## 🛠️ Tech Stack
 
@@ -160,6 +196,9 @@ valentine-quest/
 │   │   ├── UI/
 │   │   │   ├── MuteButton.tsx      # Sound toggle button
 │   │   │   └── SupportButton.tsx   # Tech support contact
+│   │   ├── Phases/
+│   │   │   ├── LoveLetter.tsx      # ⚠️ CUSTOMIZE YOUR LOVE LETTER
+│   │   │   └── HeartAssembly.tsx   # Animated "I LOVE YOU" moment
 │   │   └── Terminal/
 │   │       ├── BootSequence.tsx    # Initial loading animation
 │   │       ├── Message.tsx         # Typing effect component
@@ -185,6 +224,7 @@ valentine-quest/
 ├── README.md
 ├── CHECKLIST.md
 ├── SUPPORT_SETUP.md                # Tech support configuration guide
+├── EMOTIONAL_PHASES.md             # Love letter & heart animation guide
 └── vite.config.ts
 ```
 

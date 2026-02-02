@@ -10,6 +10,8 @@ import { ProgressBar } from './components/Terminal/ProgressBar';
 import { FallingHearts } from './components/Background/FallingHearts';
 import { MuteButton } from './components/UI/MuteButton';
 import { SupportButton } from './components/UI/SupportButton';
+import { LoveLetter } from './components/Phases/LoveLetter';
+import { HeartAssembly } from './components/Phases/HeartAssembly';
 import { useSoundManager } from './hooks/useSoundManager';
 import { levels } from './data/levels';
 import { GamePhase } from './types';
@@ -74,12 +76,13 @@ function App() {
             setAttemptCount(0);
             setShowHint(false);
 
-            // Move to next level or complete
+            // Move to next level or transition to letter phase
             setTimeout(() => {
                 if (currentLevelIndex < levels.length - 1) {
                     setCurrentLevelIndex(currentLevelIndex + 1);
                 } else {
-                    setGamePhase('complete');
+                    // All levels complete - go to love letter
+                    setGamePhase('letter');
                 }
             }, 1500);
         } else {
@@ -99,6 +102,14 @@ function App() {
 
     const handleShowHint = () => {
         setErrorMessage(`💡 Подсказка: ${currentLevel.hint}`);
+    };
+
+    const handleLetterProceed = () => {
+        setGamePhase('heart');
+    };
+
+    const handleHeartComplete = () => {
+        setGamePhase('complete');
     };
 
     return (
@@ -267,6 +278,17 @@ function App() {
                             </motion.div>
                         )}
 
+                        {gamePhase === 'letter' && (
+                            <motion.div
+                                key="letter"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                            >
+                                <LoveLetter onProceed={handleLetterProceed} />
+                            </motion.div>
+                        )}
+
                         {gamePhase === 'complete' && (
                             <motion.div
                                 key="complete"
@@ -294,6 +316,13 @@ function App() {
                     </motion.div>
                 </motion.div>
             </Container>
+
+            {/* Heart Assembly - Fullscreen overlay */}
+            <AnimatePresence>
+                {gamePhase === 'heart' && (
+                    <HeartAssembly onComplete={handleHeartComplete} />
+                )}
+            </AnimatePresence>
         </div>
     );
 }

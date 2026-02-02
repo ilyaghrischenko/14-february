@@ -21,4 +21,4 @@ export interface Message {
     timestamp: number;
 }
 
-export type GamePhase = 'boot' | 'playing' | 'complete';
+export type GamePhase = 'boot' | 'playing' | 'letter' | 'heart' | 'complete';
