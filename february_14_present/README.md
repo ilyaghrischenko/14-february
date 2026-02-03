@@ -10,6 +10,7 @@ A cyber-romance terminal interface where your girlfriend answers personal questi
 - **🔊 Sound Design**: Keyboard typing sounds, success chimes, error glitches
 - **💌 Love Letter Phase**: Emotional letter reveal after quiz completion
 - **💖 Heart Assembly Animation**: Cinematic "I LOVE YOU" moment
+- **⏱️ Relationship Timer**: Live counter showing exact relationship duration
 - **🆘 Tech Support Button**: After 3 errors, can message you via Telegram/WhatsApp
 - **🔇 Mute Control**: Toggle sound on/off (top-right corner)
 - **Responsive Design**: Flawless on both iPhone 17 Pro Max and Desktop
@@ -253,7 +254,7 @@ The app includes robust input validation:
 
 ```typescript
 const normalizeAnswer = (answer: string): string => {
-  return answer.trim().toLowerCase();
+   return answer.trim().toLowerCase();
 };
 ```
 

@@ -39,6 +39,17 @@ Before deploying your Valentine's Quest, make sure you've customized everything!
 - [ ] Keep it in Russian
 - [ ] End with intrigue leading to "I LOVE YOU"
 
+## 3.5. Relationship Timer (NEW! ⚠️ ОБЯЗАТЕЛЬНО!)
+
+📝 **File**: `src/components/Terminal/RelationshipTimer.tsx`
+
+- [ ] **Set your relationship start date** (replace `START_DATE` constant)
+- [ ] Use format: `'YYYY-MM-DDT00:00:00'` (e.g., `'2022-06-15T00:00:00'`)
+- [ ] Verify the date is correct (check day/month/year)
+- [ ] Test that timer shows correct duration
+
+**See RELATIONSHIP_TIMER.md for detailed instructions!**
+
 ## 4. Photos
 
 📸 **Folder**: `public/photos/`
@@ -68,6 +79,8 @@ Before deploying your Valentine's Quest, make sure you've customized everything!
 - [ ] Verify answers work with different cases (UPPER, lower, MiXeD)
 - [ ] Test hint system (fail twice to trigger)
 - [ ] **Test support button (fail 3 times to trigger)**
+- [ ] **Test relationship timer displays correct duration**
+- [ ] **Verify timer seconds are ticking in real-time**
 - [ ] **Test sound effects (keyboard, success, error)**
 - [ ] **Test mute button (top right corner)**
 - [ ] **Test love letter appears after last question**

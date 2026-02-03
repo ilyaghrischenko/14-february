@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Sparkles } from 'lucide-react';
 import { finalRewardText } from '../../data/levels';
+import { RelationshipTimer } from './RelationshipTimer';
 
 export const FinalReward: React.FC = () => {
     // REPLACE THESE WITH YOUR ACTUAL PHOTO PATHS
@@ -75,7 +76,7 @@ export const FinalReward: React.FC = () => {
                 className="space-y-4"
             >
                 <h2 className="text-2xl font-display font-bold text-center text-pink-400 neon-text">
-                    Местонахождение подарка 💕
+                    Наши воспоминания 💕
                 </h2>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -164,6 +165,9 @@ export const FinalReward: React.FC = () => {
                     </motion.div>
                 ))}
             </div>
+
+            {/* Relationship Timer - System Uptime */}
+            <RelationshipTimer />
         </motion.div>
     );
 };
