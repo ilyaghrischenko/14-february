@@ -31,7 +31,7 @@ function App() {
     const currentLevel = levels[currentLevelIndex];
 
     // Sound manager
-    const { initializeAudio, playKeyPress, playSuccess, playError, playBoot } = useSoundManager({ isMuted });
+    const { initializeAudio, playKeyPress, playSuccess, playError, playBoot, playClick, playHeartbeat } = useSoundManager({ isMuted });
 
     // Initialize audio on first user interaction
     useEffect(() => {
@@ -115,7 +115,7 @@ function App() {
     return (
         <div className="crt-screen min-h-[100dvh]">
             <FallingHearts />
-            <MuteButton isMuted={isMuted} onToggle={() => setIsMuted(!isMuted)} />
+            <MuteButton isMuted={isMuted} onToggle={() => setIsMuted(!isMuted)} playClick={playClick} />
             <Container>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -246,7 +246,7 @@ function App() {
                                                 exit={{ opacity: 0, scale: 0.8 }}
                                                 className="flex justify-center"
                                             >
-                                                <HintButton onClick={handleShowHint} />
+                                                <HintButton onClick={handleShowHint} playClick={playClick} />
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
@@ -285,7 +285,7 @@ function App() {
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                             >
-                                <LoveLetter onProceed={handleLetterProceed} />
+                                <LoveLetter onProceed={handleLetterProceed} playClick={playClick} />
                             </motion.div>
                         )}
 
@@ -320,7 +320,7 @@ function App() {
             {/* Heart Assembly - Fullscreen overlay */}
             <AnimatePresence>
                 {gamePhase === 'heart' && (
-                    <HeartAssembly onComplete={handleHeartComplete} />
+                    <HeartAssembly onComplete={handleHeartComplete} playHeartbeat={playHeartbeat} />
                 )}
             </AnimatePresence>
         </div>

@@ -12,8 +12,6 @@ export const useSoundManager = ({ isMuted }: SoundManagerProps) => {
         // Initialize ambient sound
         if (!ambientRef.current) {
             ambientRef.current = new Audio();
-            // Using a data URL for a simple ambient tone (low frequency hum)
-            // In production, replace with actual audio files
             ambientRef.current.loop = true;
             ambientRef.current.volume = 0.1;
         }
@@ -59,6 +57,28 @@ export const useSoundManager = ({ isMuted }: SoundManagerProps) => {
 
         oscillator.start(audioContext.currentTime);
         oscillator.stop(audioContext.currentTime + 0.05);
+    };
+
+    const playClick = () => {
+        if (isMuted) return;
+
+        // Subtle cyber-click sound
+        const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        // Short, techy click (higher frequency for cyber feel)
+        oscillator.frequency.value = 1200;
+        oscillator.type = 'sine';
+
+        gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.08);
+
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.08);
     };
 
     const playSuccess = () => {
@@ -144,11 +164,74 @@ export const useSoundManager = ({ isMuted }: SoundManagerProps) => {
         oscillator.stop(audioContext.currentTime + 0.5);
     };
 
+    const playHeartbeat = () => {
+        if (isMuted) return;
+
+        const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+
+        // Romantic ambient heartbeat sound with soft pads
+        const playHeartbeatThump = (delay: number) => {
+            setTimeout(() => {
+                // Bass thump
+                const bass = audioContext.createOscillator();
+                const bassGain = audioContext.createGain();
+                bass.connect(bassGain);
+                bassGain.connect(audioContext.destination);
+
+                bass.frequency.value = 60; // Low frequency for heartbeat
+                bass.type = 'sine';
+
+                bassGain.gain.setValueAtTime(0.3, audioContext.currentTime);
+                bassGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+                bass.start(audioContext.currentTime);
+                bass.stop(audioContext.currentTime + 0.3);
+
+                // Soft pad/ambient layer
+                const pad = audioContext.createOscillator();
+                const padGain = audioContext.createGain();
+                pad.connect(padGain);
+                padGain.connect(audioContext.destination);
+
+                pad.frequency.value = 220; // A3 - romantic tone
+                pad.type = 'sine';
+
+                padGain.gain.setValueAtTime(0.15, audioContext.currentTime);
+                padGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1.5);
+
+                pad.start(audioContext.currentTime);
+                pad.stop(audioContext.currentTime + 1.5);
+            }, delay);
+        };
+
+        // Double heartbeat pattern: thump-thump ... pause ... thump-thump
+        playHeartbeatThump(0);
+        playHeartbeatThump(400);
+
+        // Soft rising ambient sweep for romance
+        const sweep = audioContext.createOscillator();
+        const sweepGain = audioContext.createGain();
+        sweep.connect(sweepGain);
+        sweepGain.connect(audioContext.destination);
+
+        sweep.frequency.setValueAtTime(200, audioContext.currentTime);
+        sweep.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 2);
+        sweep.type = 'sine';
+
+        sweepGain.gain.setValueAtTime(0.1, audioContext.currentTime);
+        sweepGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 2);
+
+        sweep.start(audioContext.currentTime);
+        sweep.stop(audioContext.currentTime + 2);
+    };
+
     return {
         initializeAudio,
         playKeyPress,
+        playClick,
         playSuccess,
         playError,
         playBoot,
+        playHeartbeat,
     };
 };

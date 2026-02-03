@@ -4,9 +4,10 @@ import { Heart, Lock, Unlock } from 'lucide-react';
 
 interface LoveLetterProps {
     onProceed: () => void;
+    playClick?: () => void;
 }
 
-export const LoveLetter: React.FC<LoveLetterProps> = ({ onProceed }) => {
+export const LoveLetter: React.FC<LoveLetterProps> = ({ onProceed, playClick }) => {
     // CUSTOMIZE THIS TEXT WITH YOUR ACTUAL LOVE LETTER
     const letterText = `Моя дорогая,
 
@@ -139,7 +140,10 @@ export const LoveLetter: React.FC<LoveLetterProps> = ({ onProceed }) => {
                 className="flex justify-center pt-4"
             >
                 <motion.button
-                    onClick={onProceed}
+                    onClick={() => {
+                        playClick?.();
+                        onProceed();
+                    }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-8 py-4 bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600

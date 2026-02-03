@@ -5,16 +5,22 @@ import { Lightbulb } from 'lucide-react';
 interface HintButtonProps {
     onClick: () => void;
     disabled?: boolean;
+    playClick?: () => void;
 }
 
-export const HintButton: React.FC<HintButtonProps> = ({ onClick, disabled = false }) => {
+export const HintButton: React.FC<HintButtonProps> = ({ onClick, disabled = false, playClick }) => {
+    const handleClick = () => {
+        playClick?.();
+        onClick();
+    };
+
     return (
         <motion.button
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             whileHover={{ scale: 1.05, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
-            onClick={onClick}
+            onClick={handleClick}
             disabled={disabled}
             className="px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-500
                  text-neutral-900 font-bold rounded font-display uppercase tracking-wider

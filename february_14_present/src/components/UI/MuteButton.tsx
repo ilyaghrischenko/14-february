@@ -5,9 +5,18 @@ import { Volume2, VolumeX } from 'lucide-react';
 interface MuteButtonProps {
     isMuted: boolean;
     onToggle: () => void;
+    playClick?: () => void;
 }
 
-export const MuteButton: React.FC<MuteButtonProps> = ({ isMuted, onToggle }) => {
+export const MuteButton: React.FC<MuteButtonProps> = ({ isMuted, onToggle, playClick }) => {
+    const handleToggle = () => {
+        // Don't play click sound when unmuting (would be weird)
+        if (!isMuted && playClick) {
+            playClick();
+        }
+        onToggle();
+    };
+
     return (
         <motion.button
             initial={{ opacity: 0, scale: 0 }}
@@ -15,7 +24,7 @@ export const MuteButton: React.FC<MuteButtonProps> = ({ isMuted, onToggle }) => 
             transition={{ delay: 0.5 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={onToggle}
+            onClick={handleToggle}
             className="fixed top-4 right-4 z-50 p-3 rounded-full
                  bg-neutral-900/80 border border-pink-500/30
                  hover:border-pink-500/60 transition-all duration-300
