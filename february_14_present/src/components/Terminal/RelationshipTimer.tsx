@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Heart, Activity } from 'lucide-react';
 
 export const RelationshipTimer: React.FC = () => {
-    // TODO: REPLACE THIS DATE WITH YOUR RELATIONSHIP START DATE
     const START_DATE = new Date('2021-05-17T18:00:00'); // Format: YYYY-MM-DD
 
     const [timeUnits, setTimeUnits] = useState({
@@ -62,7 +61,7 @@ export const RelationshipTimer: React.FC = () => {
                         transition={{ duration: 2, repeat: Infinity }}
                         className="text-emerald-500/70 font-mono text-xs sm:text-sm uppercase tracking-wider"
                     >
-                        System Uptime // Love_Protocol_Duration
+                        Время_Безотказной_Работы_Системы // Длительность_Любовного_Протокола
                     </motion.p>
                     <Heart className="w-5 h-5 text-pink-500 fill-pink-500" />
                 </div>
