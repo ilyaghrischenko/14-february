@@ -4,30 +4,30 @@ import type {Level} from '../types';
 export const levels: Level[] = [
     {
         id: 1,
-        question: 'В каком городе мы впервые встретились?',
-        answer: 'киев', // Normalized to lowercase
-        hint: 'Столица нашей страны, место где началась наша история...',
+        question: 'В каком месте был наш первый поцелуй?',
+        answers: ['лаборатория', 'лаба'], // Normalized to lowercase
+        hint: 'Заброшка недалеко от Молокозавода...',
         errorMessage: 'Доступ запрещён. Неверный ответ.',
     },
     {
         id: 2,
-        question: 'Как зовут нашего любимого кота?',
-        answer: 'мурзик', // REPLACE WITH ACTUAL PET NAME (lowercase)
-        hint: 'Тот, кто мурлычет по утрам и будит нас своими лапками...',
+        question: 'Какой наш любимый сериал?',
+        answers: ['сашатаня', 'саша таня', 'игра в кальмара', 'кальмар', 'чернобыль'], // REPLACE WITH ACTUAL PET NAME (lowercase)
+        hint: 'Подумай зай, мы не так уж и много их смотрели...',
         errorMessage: 'Система защиты активирована. Попробуй ещё раз.',
     },
     {
         id: 3,
-        question: 'Какое наше любимое место для прогулок?',
-        answer: 'парк', // REPLACE WITH ACTUAL PLACE (lowercase)
+        question: 'На концерт кого мы хотели бы попасть?',
+        answers: ['макс корж', 'корж'], // REPLACE WITH ACTUAL PLACE (lowercase)
         hint: 'Место, где мы гуляем под луной, держась за руки...',
         errorMessage: 'Ошибка аутентификации. Данные не совпадают.',
     },
     {
         id: 4,
-        question: 'Какую песню мы считаем "нашей"?',
-        answer: 'океан эльзы', // REPLACE WITH ACTUAL SONG (lowercase)
-        hint: 'Та мелодия, которая играла, когда мы танцевали в первый раз...',
+        question: 'Какая украинская группа нам очень нравиться?',
+        answers: ['океан ельзы', 'океан эльзы', 'океан ельзи'], // REPLACE WITH ACTUAL SONG (lowercase)
+        hint: 'Святослав...',
         errorMessage: 'Протоколы любви не распознали ответ.',
     },
 ];

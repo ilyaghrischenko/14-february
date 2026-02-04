@@ -1,7 +1,7 @@
 export interface Level {
     id: number;
     question: string;
-    answer: string;
+    answers: string[];
     hint: string;
     errorMessage: string;
 }

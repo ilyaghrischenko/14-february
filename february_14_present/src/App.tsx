@@ -63,9 +63,9 @@ function App() {
 
     const handleSubmit = (userAnswer: string) => {
         const normalizedUserAnswer = normalizeAnswer(userAnswer);
-        const normalizedCorrectAnswer = normalizeAnswer(currentLevel.answer);
+        const normalizedCorrectAnswers = currentLevel.answers.map(answer => normalizeAnswer(answer));
 
-        if (normalizedUserAnswer === normalizedCorrectAnswer) {
+        if (normalizedCorrectAnswers.includes(normalizedUserAnswer)) {
             // Correct answer!
             playSuccess();
             setSuccessMessages([
