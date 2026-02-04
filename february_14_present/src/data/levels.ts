@@ -20,7 +20,7 @@ export const levels: Level[] = [
         id: 3,
         question: 'На концерт кого мы хотели бы попасть?',
         answers: ['макс корж', 'корж'], // REPLACE WITH ACTUAL PLACE (lowercase)
-        hint: 'Место, где мы гуляем под луной, держась за руки...',
+        hint: 'Он беларус...',
         errorMessage: 'Ошибка аутентификации. Данные не совпадают.',
     },
     {
