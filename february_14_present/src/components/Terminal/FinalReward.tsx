@@ -7,12 +7,9 @@ import { RelationshipTimer } from './RelationshipTimer';
 export const FinalReward: React.FC = () => {
     // REPLACE THESE WITH YOUR ACTUAL PHOTO PATHS
     const photos = [
-        '/photos/photo1.jpg', // REPLACE
-        '/photos/photo2.jpg', // REPLACE
-        '/photos/photo3.jpg', // REPLACE
-        '/photos/photo4.jpg', // REPLACE
-        '/photos/photo5.jpg', // REPLACE
-        '/photos/photo6.jpg', // REPLACE
+        '/photos/photo1.JPG',
+        '/photos/photo3.JPG',
+        '/photos/photo2.JPG'
     ];
 
     return (
@@ -76,7 +73,7 @@ export const FinalReward: React.FC = () => {
                 className="space-y-4"
             >
                 <h2 className="text-2xl font-display font-bold text-center text-pink-400 neon-text">
-                    Наши воспоминания 💕
+                    Местонахождение подарка 💕
                 </h2>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -119,17 +116,6 @@ export const FinalReward: React.FC = () => {
                                         }}
                                     />
                                 </div>
-
-                                {/* Polaroid caption */}
-                                <p className="text-center text-xs sm:text-sm text-neutral-800 font-mono mt-2">
-                                    {/* CUSTOMIZE THESE CAPTIONS */}
-                                    {index === 0 && 'Первое свидание'}
-                                    {index === 1 && 'Наш первый поцелуй'}
-                                    {index === 2 && 'Вместе навсегда'}
-                                    {index === 3 && 'Самый счастливый день'}
-                                    {index === 4 && 'Ты и я'}
-                                    {index === 5 && 'Наша любовь'}
-                                </p>
                             </div>
 
                             {/* Glow effect on hover */}

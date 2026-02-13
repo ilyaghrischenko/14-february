@@ -165,7 +165,7 @@ export const RelationshipTimer: React.FC = () => {
                     className="text-center mt-4"
                 >
                     <p className="text-pink-400/80 font-mono text-xs sm:text-sm">
-                        <span className="text-emerald-500/70">STATUS:</span> ❤️ RUNNING FLAWLESSLY ❤️
+                        <span className="text-emerald-500/70">СТАТУС:</span> ❤️ УСПЕШНО РАБОТАЕТ ❤️
                     </p>
                 </motion.div>
             </div>
